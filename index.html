@@ -3,86 +3,200 @@
 <head>
   <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/resonance-audio/build/resonance-audio.min.js"></script>
-  <script src="https://cdn.rawgit.com/etiennepinchon/aframe-resonance/master/dist/aframe-resonance.min.js"></script>
+  <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+  <!-- <script src="lib/aframe-resonance.js"></script> -->
+  <script src="lib/aabb-collider.js"></script>
+  <script src="lib/grab.js"></script>
   <script src="lib/aframe-teleport-controls.min.js"></script>
   <script src="lib/skyGradient.js"></script>
-  <script src="https://rawgit.com/ngokevin/aframe-motion-capture/343f99/dist/aframe-motion-capture.min.js"></script>
-  <script src="https://unpkg.com/aframe-input-mapping-component/dist/aframe-input-mapping-component.min.js"></script>
+  <script src="lib/ground.js"></script>
+  <script src="lib/app.js"></script>
+
 
   <script src="lib/mappings.js"></script>
-  </head>
-  <body style="background-color: #000">
+</head>
+<body style="background-color: #000">
 
-  <a-scene avatar-recorder>
+  <a-scene fog="color: #bc483e; near: 0; far: 65;">
+
     <a-assets>
+
+      <a-mixin id="cube"
+      geometry="primitive: box; height: 0.30; width: 0.30; depth: 0.30"
+      material="color: #EF2D5E;"></a-mixin>
+      <a-mixin id="cube-collided"
+      material="color: #F2E646;"></a-mixin>
+      <a-mixin id="cube-grabbed"
+      material="color: #F2E646;"></a-mixin>
+
+
       <a-mixin id="box" geometry="primitive: box; width: 2; height: 0.5; depth: 0.5" randomcolor></a-mixin>
       <a-mixin id="sphere" geometry="primitive: sphere; radius: 0.5" randomcolor></a-mixin>
+
       <img id="skymap" src="assets/sky.jpg" crossorigin="anonymous">
       <img id="floor" src="assets/floor.jpg" crossorigin="anonymous">
+
+      <img id="woodjpg" src="assets/wood.jpg">
+      <img id="wood-LOGjpg" src="assets/images/wood-LOG.jpg">
+
+      <img id="metal" src="assets/metal.png">
+      <img id="wallpng" src="assets/wall.png">
+
+
+
+
+    <!-- BATO OBJETO -->
+    <a-asset-item id="bato-obj" src="assets/bato.obj"></a-asset-item>
+    <a-asset-item id="bato-mtl" src="assets/bato.mtl"></a-asset-item>
+    <!-- FIN BATO OBJETO -->
     </a-assets>
-  <a-resonance-room position="0 0 0" id="dos"
-  src-position="0 0.5 0"
-  src="./assets/track.mp3"
-  loop="true",
-  autoplay="true",
-  width="4"
-  height="4"
-  depth="4"
-  helper="true"
-  left-wall="plywood-panel"
-  right-wall="plywood-panel"
-  front-wall="plywood-panel"
-  back-wall="plywood-panel"
-  down-wall="plywood-panel"
-  up-wall="plywood-panel"
-  >
 
-</a-resonance-room>
+    <a-resonance-room position="0 0 0" id="uno"
+    src-position="0 1 0"
+    src="./assets/track.mp3"
+    loop="true",
+    autoplay="true",
+    width="4"
+    height="4"
+    depth="4"
+    helper="true"
+    left-wall="plywood-panel"
+    right-wall="plywood-panel"
+    front-wall="plywood-panel"
+    back-wall="plywood-panel"
+    down-wall="plywood-panel"
+    up-wall="plywood-panel"
+    >
+  </a-resonance-room>
 
-<a-resonance-room position="0 0 15" id="uno"
-src-position="0 0.5 0"
-src="./assets/track.mp3"
-loop="true",
-autoplay="true",
-width="4"
-height="4"
-depth="4"
-helper="true"
-left-wall="metal"
-right-wall="metal"
-front-wall="metal"
-back-wall="metal"
-down-wall="metal"
-up-wall="metal"
->
+<!-- luces -->
+<!-- <a-light type="point" light="color: #fff; intensity:0.6" position="3 10 1"></a-light>
+<a-light type="point" light="color: #fff; intensity:0.2" position="-3 -10 0"></a-light>
+<a-light type="hemisphere" groundColor="#888" intensity="0.8"></a-light> -->
 
-</a-resonance-room>
+<!-- Cielo -->
+<!-- <a-entity id="sky" geometry="primitive:sphere; radius:30; phiLength:360; phiStart:0; thetaLength:90" material="shader:flat; side:back; height:2048; src:#skymap; width:2048"></a-entity> -->
+<!-- <a-entity id="sky"
+geometry="primitive: sphere; radius: 65;"
+material="shader: skyGradient; colorTop: #353449; colorBottom: #BC483E; side: back"></a-entity>
+<a-entity ground></a-entity> -->
 
-    <!-- luces -->
-    <a-light type="point" light="color: #fff; intensity:0.6" position="3 10 1"></a-light>
-    <a-light type="point" light="color: #fff; intensity:0.2" position="-3 -10 0"></a-light>
-    <a-light type="hemisphere" groundColor="#888" intensity="0.8"></a-light>
+<!-- Suelo -->
+<!-- <a-entity id="ground" mixin="floor"
+geometry="primitive: box; width: 50; height: 0.01; depth: 50"
+material="shader: flat; src: #floor">
+</a-entity> -->
 
-    <a-entity id="ground" mixin="floor"
-      geometry="primitive: box; width: 50; height: 0.01; depth: 50"
-      material="shader: flat; src: #floor">
-    </a-entity>
-
-    <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: movida; collisionEntities: [mixin='floor']; teleportOrigin: #movida;"></a-mixin>
+<!-- Environment -->
+<a-entity id="sky"
+          geometry="primitive: sphere; radius: 65;"
+          material="shader: skyGradient; colorTop: #353449; colorBottom: #BC483E; side: back"></a-entity>
+ <a-entity ground></a-entity>
+ <a-entity light="type: point; color: #f4f4f4; intensity: 0.2; distance: 0" position="8 10 18"></a-entity>
+ <a-entity light="type: point; color: #f4f4f4; intensity: 0.6; distance: 0" position="-8 10 -18"></a-entity>
+ <a-entity light="type: ambient; color: #f4f4f4; intensity: 0.4;" position="-8 10 -18"></a-entity>
+</a-entity>
 
 
-    <a-entity id="sky" geometry="primitive:sphere; radius:30; phiLength:360; phiStart:0; thetaLength:90" material="shader:flat; side:back; height:2048; src:#skymap; width:2048"></a-entity>
+<a-entity position="0 0 -0.5">
+  <a-entity class="cube" mixin="cube" position="0.30 0.20 0"></a-entity>
+</a-entity>
 
-    <!-- hand controls -->
-    <!-- <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: #cameraRig;"></a-mixin> -->
-    <a-entity id="cameraRig">
-      <!-- <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: #movida; collisionEntities: [mixin='floor']; teleportOrigin: #movida;"></a-mixin> -->
-      <a-entity id="movida" camera position="0 0 0" wasd-controls look-controls></a-entity>
-      <!-- hand controls -->
-      <a-entity id="leftHand" mixin="teleport" vive-controls="hand: left" ></a-entity>
-      <a-entity id="rightHand" mixin="teleport" vive-controls="hand: right"></a-entity>
-    </a-entity>
+<!-- OBJETO EN MADERA -->
+<a-entity id="group" position="-1.61 1.9 5.210000000000001" rotation="0 0 0" visible="true">
+  <a-box id="box-2" position="0.1100000000000001 1.1 -8.21" rotation="90 90 0" scale="1 1 1"
+  geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #woodjpg; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
 
-  </a-scene>
+  <a-box id="box-4" position="2.1100000000000003 -0.3999999999999999 -8.21"
+  rotation="0 90 0" scale="1 1 1" geometry="width: 5; height: 3.00; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #woodjpg; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-3" position="-1.89 -0.3999999999999999 -8.21" rotation="0 90 0"
+  scale="1 1 1" geometry="width: 5; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #woodjpg; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box" position="0.1100000000000001 -0.3999999999999999 -10.71"
+  rotation="0 0 0" scale="1 1 1" geometry="width: 4; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #woodjpg; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+</a-entity>
+<!-- FIN OBJETO EN MADERA -->
+
+
+
+<!-- OGETO MURO -->
+<a-entity id="box-wall" position="-10.5 1.9 5.210000000000001" rotation="0 0 0"
+visible="true">
+
+  <a-box id="box-1" position="0.1100000000000001 -0.3999999999999999 -10.71" rotation="0 0 0"
+  scale="1 1 1" geometry="width: 4; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-1" position="2.07 -0.3999999999999999 -8.21" rotation="0 90 0"
+  scale="1 1 1" geometry="width: 5; height: 3.00; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-1" position="0.1100000000000001 1.1 -8.21" rotation="90 90 0"
+  scale="1 1 1" geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-1" position="-1.85 -0.4 -8.21" rotation="0 90 0" scale="1 1 1"
+  geometry="width: 5; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: flat; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-5" position="0.11 -1.9 -8.21" rotation="90 90 0" scale="1 1 1"
+  geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+</a-entity>
+<!-- FIN OGETO MURO -->
+
+<!-- OGETO METAL -->
+<a-entity id="box-wall-1" position="-15.84 1.9 5.210000000000001" rotation="0 0 0"
+visible="true">
+
+  <a-box id="box-6" position="0.1100000000000001 -0.3999999999999999 -10.71" rotation="0 0 0"
+  scale="1 1 1" geometry="width: 4; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-6" position="-1.85 -0.4 -8.21" rotation="0 90 0" scale="1 1 1"
+  geometry="width: 5; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: flat; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-6" position="0.1100000000000001 1.1 -8.21" rotation="90 90 0"
+  scale="1 1 1" geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-6" position="2.07 -0.3999999999999999 -8.21" rotation="0 90 0"
+  scale="1 1 1" geometry="width: 5; height: 3.00; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-6" position="0.11 -1.9 -8.21" rotation="90 90 0" scale="1 1 1"
+  geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+</a-entity>
+<!--FIN OGETO METAL -->
+
+<!-- BATO OBJETO -->
+ <a-obj-model src="#bato-obj" mtl="#bato-mtl" position="0 4.495 -3.798" rotation="90 0 0" scale="100 100 100" material=""></a-obj-model>
+ <!-- FIN BATO OBJETO -->
+
+
+<a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: movida; collisionEntities: [mixin='floor']; teleportOrigin: #movida;"></a-mixin>
+<!-- hand controls -->
+<!-- <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: #cameraRig;"></a-mixin> -->
+<a-entity id="cameraRig">
+  <!-- <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: #movida; collisionEntities: [mixin='floor']; teleportOrigin: #movida;"></a-mixin> -->
+  <a-entity id="movida" camera position="0 0 0" wasd-controls look-controls mouse-cursor></a-entity>
+  <!-- hand controls -->
+  <a-entity id="leftHand" mixin="teleport" vive-controls="hand: left" ></a-entity>
+  <a-entity id="rightHand" hand-controls="right" aabb-collider="objects: .resonance-source-helper-sphere;" grab></a-entity>
+</a-entity>
+
+</a-scene>
+
+<script type="text/javascript">
+  let el = document.querySelector("a-resonance-room");
+  el.audoEl.pause();
+</script>
 </body>
 </html>
