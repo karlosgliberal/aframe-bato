@@ -38,6 +38,17 @@
 
       <img id="woodjpg" src="assets/wood.jpg">
       <img id="wood-LOGjpg" src="assets/images/wood-LOG.jpg">
+
+      <img id="metal" src="assets/metal.png">
+      <img id="wallpng" src="assets/wall.png">
+
+
+
+
+    <!-- BATO OBJETO -->
+    <a-asset-item id="bato-obj" src="assets/bato.obj"></a-asset-item>
+    <a-asset-item id="bato-mtl" src="assets/bato.mtl"></a-asset-item>
+    <!-- FIN BATO OBJETO -->
     </a-assets>
 
     <a-resonance-room position="0 0 0" id="uno"
@@ -111,25 +122,64 @@ material="shader: flat; src: #floor">
 </a-entity>
 <!-- FIN OBJETO EN MADERA -->
 
-<!-- OBJETO EN MADERA -->
-<a-entity id="group" position="10.61 1.9 5.210000000000001" rotation="0 0 0" visible="true">
-  <a-box id="box-2" position="0.1100000000000001 1.1 -8.21" rotation="90 90 0" scale="1 1 1"
-  geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #woodjpg; metalness: 0.5; roughness: 1; repeat: 1 1;"
+
+
+<!-- OGETO MURO -->
+<a-entity id="box-wall" position="-10.5 1.9 5.210000000000001" rotation="0 0 0"
+visible="true">
+
+  <a-box id="box-1" position="0.1100000000000001 -0.3999999999999999 -10.71" rotation="0 0 0"
+  scale="1 1 1" geometry="width: 4; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
   shadow="cast: true; receive: true;" visible="true"></a-box>
 
-  <a-box id="box-4" position="2.1100000000000003 -0.3999999999999999 -8.21"
-  rotation="0 90 0" scale="1 1 1" geometry="width: 5; height: 3.00; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #woodjpg; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  <a-box id="box-1" position="2.07 -0.3999999999999999 -8.21" rotation="0 90 0"
+  scale="1 1 1" geometry="width: 5; height: 3.00; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
   shadow="cast: true; receive: true;" visible="true"></a-box>
 
-  <a-box id="box-3" position="-1.89 -0.3999999999999999 -8.21" rotation="0 90 0"
-  scale="1 1 1" geometry="width: 5; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #woodjpg; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  <a-box id="box-1" position="0.1100000000000001 1.1 -8.21" rotation="90 90 0"
+  scale="1 1 1" geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
   shadow="cast: true; receive: true;" visible="true"></a-box>
 
-  <a-box id="box" position="0.1100000000000001 -0.3999999999999999 -10.71"
-  rotation="0 0 0" scale="1 1 1" geometry="width: 4; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #woodjpg; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  <a-box id="box-1" position="-1.85 -0.4 -8.21" rotation="0 90 0" scale="1 1 1"
+  geometry="width: 5; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: flat; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-5" position="0.11 -1.9 -8.21" rotation="90 90 0" scale="1 1 1"
+  geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #wallpng; metalness: 0.5; roughness: 1; repeat: 1 1;"
   shadow="cast: true; receive: true;" visible="true"></a-box>
 </a-entity>
-<!-- FIN OBJETO EN MADERA -->
+<!-- FIN OGETO MURO -->
+
+<!-- OGETO METAL -->
+<a-entity id="box-wall-1" position="-15.84 1.9 5.210000000000001" rotation="0 0 0"
+visible="true">
+
+  <a-box id="box-6" position="0.1100000000000001 -0.3999999999999999 -10.71" rotation="0 0 0"
+  scale="1 1 1" geometry="width: 4; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-6" position="-1.85 -0.4 -8.21" rotation="0 90 0" scale="1 1 1"
+  geometry="width: 5; height: 3; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: flat; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-6" position="0.1100000000000001 1.1 -8.21" rotation="90 90 0"
+  scale="1 1 1" geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-6" position="2.07 -0.3999999999999999 -8.21" rotation="0 90 0"
+  scale="1 1 1" geometry="width: 5; height: 3.00; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+
+  <a-box id="box-6" position="0.11 -1.9 -8.21" rotation="90 90 0" scale="1 1 1"
+  geometry="width: 5; height: 4; depth: 0.08;" material="color: #ffffff; opacity: 1; shader: standard; side: double; src: #metal; metalness: 0.5; roughness: 1; repeat: 1 1;"
+  shadow="cast: true; receive: true;" visible="true"></a-box>
+</a-entity>
+<!--FIN OGETO METAL -->
+
+<!-- BATO OBJETO -->
+ <a-obj-model src="#bato-obj" mtl="#bato-mtl" position="0 4.495 -3.798" rotation="90 0 0" scale="100 100 100" material=""></a-obj-model>
+ <!-- FIN BATO OBJETO -->
+
 
 <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: movida; collisionEntities: [mixin='floor']; teleportOrigin: #movida;"></a-mixin>
 <!-- hand controls -->
