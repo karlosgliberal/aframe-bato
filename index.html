@@ -18,7 +18,7 @@
 </head>
 <body style="background-color: #000">
 
-  <a-scene fog="color: #bc483e; near: 0; far: 65;">
+  <a-scene fog="color: #bc483e; near: 0; far: 65;" screenshot="height:8000; width:8000">
 
     <a-assets>
 
@@ -49,6 +49,8 @@
     <a-asset-item id="bato-mtl" src="assets/bato.mtl"></a-asset-item>
     <!-- FIN BATO OBJETO -->
     </a-assets>
+
+
      <a-entity environment="preset:yavapai"></a-entity>
     <a-resonance-room position="0 0 0" id="uno"
     src-position="0 1 0"
@@ -206,9 +208,9 @@ visible="true">
 <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: movida; collisionEntities: [mixin='floor']; teleportOrigin: #movida;"></a-mixin>
 <!-- hand controls -->
 <!-- <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: #cameraRig;"></a-mixin> -->
-<a-entity id="cameraRig">
+<a-entity id="cameraRig" position="0 0.5 0">
   <!-- <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: #movida; collisionEntities: [mixin='floor']; teleportOrigin: #movida;"></a-mixin> -->
-  <a-entity id="movida" camera position="0 0 0" wasd-controls look-controls mouse-cursor></a-entity>
+  <a-entity id="movida" camera  wasd-controls look-controls mouse-cursor></a-entity>
   <!-- hand controls -->
   <a-entity id="leftHand" mixin="teleport" vive-controls="hand: left" ></a-entity>
   <a-entity id="rightHand" hand-controls="right" aabb-collider="objects: .resonance-source-helper-sphere;" grab></a-entity>
